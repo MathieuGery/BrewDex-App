@@ -14,8 +14,7 @@ import {
   nameValidator,
 } from '../core/utils';
 import authServices from '../services/Auth';
-import MySnackBar from '../components/SnackBar';
-import { Snackbar } from 'react-native-paper';
+import MySnackBar from '../components/MySnackBar';
 
 type Props = {
   navigation: Navigation;
@@ -25,6 +24,8 @@ const RegisterScreen = ({ navigation }: Props) => {
   const [name, setName] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
+  const [ErrorMessage, setErrorMessage] = useState('');
+  const [IsVisible, setIsVisible] = useState(false);
 
   const _onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
@@ -44,7 +45,11 @@ const RegisterScreen = ({ navigation }: Props) => {
         console.log('Votre compte a bien été créer');
         navigation.navigate('Dashboard');
       })
-      .catch((error) => console.log(error.data.description));
+      .catch((error) => {
+          console.log("ICICICICICICIC", error.data.message);
+          setErrorMessage(error.data.message);
+          setIsVisible(true);
+      });
   };
 
   return (
@@ -97,7 +102,8 @@ const RegisterScreen = ({ navigation }: Props) => {
           <Text style={styles.link}>Connectez vous ici</Text>
         </TouchableOpacity>
       </View>
-      <MySnackBar></MySnackBar>
+      <MySnackBar message={ErrorMessage} isVisible={IsVisible} setIsVisible={setIsVisible}/>
+
     </Background>
   );
 };
