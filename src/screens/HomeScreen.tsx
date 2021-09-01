@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }: Props) => (
     <Paragraph>
       Se souvenir des bieres !
     </Paragraph>
-    <Button mode="contained" onPress={() => navigation.navigate('LoginScreen')}>
+    <Button mode="contained" onPress={() => navigation.navigate('Dashboard')}>
       Se connecter
     </Button>
     <Button
