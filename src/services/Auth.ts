@@ -1,4 +1,13 @@
 import request from './APIKit';
+import * as SecureStore from 'expo-secure-store'
+
+async function setHeader() {
+  const token = await SecureStore.getItemAsync('sltoken');
+
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+}
 
 async function register(data) {
   return request({
@@ -16,9 +25,21 @@ async function login(data) {
   });
 }
 
+async function getBeerInfos(data) {
+  const headers = await setHeader();
+
+  return request({
+    url: '/beer/infos',
+    method: 'POST',
+    data,
+    headers,
+  });
+}
+
 const authServices = {
   register,
-  login
+  login,
+  getBeerInfos
 };
 
 export default authServices;

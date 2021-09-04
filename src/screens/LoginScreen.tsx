@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
+import * as SecureStore from 'expo-secure-store'
 import { emailValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
 import authServices from '../services/Auth';
@@ -22,7 +23,7 @@ const LoginScreen = ({ navigation }: Props) => {
   const _onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
-    console.log("email");
+
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
@@ -32,7 +33,7 @@ const LoginScreen = ({ navigation }: Props) => {
     await authServices.login(
       { email: email.value, password: password.value},
     )
-      .then(() => console.log('Votre compte a bien été créer'))
+      .then(async (data) => await SecureStore.setItemAsync('sltoken', data.token))
       .catch((error) => console.log(error.data.description));
 
     navigation.navigate('Dashboard');
