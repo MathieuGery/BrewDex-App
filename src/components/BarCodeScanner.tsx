@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import Background from "./Background";
+import authServices from "../services/Auth";
 
 export default function MyBarCodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [beerInfos, setBeerInfos] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -13,9 +16,17 @@ export default function MyBarCodeScanner() {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBeeInfos = (data) => {
+    alert(`Bar code with type and data ${data.infos.product.product_name} has been scanned!`);
+  };
+
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    await authServices.getBeerInfos(
+      { product_id: data},
+    )
+      .then((data) => handleBeeInfos(data))
+      .catch((error) => console.log(error.data.description));
   };
 
   if (hasPermission === null) {
@@ -26,13 +37,13 @@ export default function MyBarCodeScanner() {
   }
 
   return (
-    <View style={styles.container}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-    </View>
+    <Background>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+        {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+    </Background>
   );
 }
 
@@ -40,7 +51,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    width: '100%',
     overflow: 'hidden',
+    margin: 10,
+    marginHorizontal: 30,
   },
 });

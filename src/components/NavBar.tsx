@@ -5,7 +5,7 @@ import Background from "./Background";
 import { theme } from '../core/theme';
 import MyBarCodeScanner from "./BarCodeScanner";
 
-const MusicRoute = () => <Background><Text>Music</Text></Background>;
+const MusicRoute = () => <Background><Text>Comix le bg</Text></Background>;
 const AlbumsRoute = () => <Text>Albums</Text>;
 
 type RoutesState = Array<{
