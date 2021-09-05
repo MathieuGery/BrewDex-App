@@ -3,11 +3,14 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Background from "./Background";
 import authServices from "../services/Auth";
+import { theme } from '../core/theme';
+import { ActivityIndicator } from "react-native-paper";
 
 export default function MyBarCodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [beerInfos, setBeerInfos] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -17,11 +20,13 @@ export default function MyBarCodeScanner() {
   }, []);
 
   const handleBeeInfos = (data) => {
+    setIsLoading(false);
     alert(`Bar code with type and data ${data.infos.product.product_name} has been scanned!`);
   };
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
+    setIsLoading(true);
     await authServices.getBeerInfos(
       { product_id: data},
     )
@@ -42,6 +47,7 @@ export default function MyBarCodeScanner() {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
+        <ActivityIndicator animating={isLoading} color={theme.colors.primary} size={'large'}/>
         {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
     </Background>
   );

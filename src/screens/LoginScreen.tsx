@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
-import * as SecureStore from 'expo-secure-store'
+import * as SecureStore from 'expo-secure-store';
 import { emailValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
 import authServices from '../services/Auth';
