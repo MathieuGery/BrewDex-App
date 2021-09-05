@@ -17,7 +17,6 @@ const HomeScreen = ({ navigation }: Props) => {
   useEffect(() => {
     (async () => {
       const userToken = await SecureStore.getItemAsync('sltoken');
-      navigation.navigate(userToken ? 'App': 'Auth');
     })();
   }, []);
 

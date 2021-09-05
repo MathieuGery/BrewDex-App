@@ -5,7 +5,7 @@ import Background from "./Background";
 import { theme } from '../core/theme';
 import MyBarCodeScanner from "./BarCodeScanner";
 import Settings from "../screens/Settings";
-import {Navigation} from "../types";$
+import {Navigation} from "../types";
 
 const AlbumsRoute = () => <Text>Albums</Text>;
 
@@ -37,7 +37,7 @@ const MyNavBar = ({navigation}: Props) => {
       navigationState={{ index, routes }}
       onIndexChange={index => setIndex(index)}
       renderScene={BottomNavigation.SceneMap({
-        home: Settings,
+        home: AlbumsRoute,
         camera: MyBarCodeScanner,
         compte: AlbumsRoute,
       })}
