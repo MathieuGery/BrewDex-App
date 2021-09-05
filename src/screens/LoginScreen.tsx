@@ -33,10 +33,9 @@ const LoginScreen = ({ navigation }: Props) => {
     await authServices.login(
       { email: email.value, password: password.value},
     )
-      .then(async (data) => await SecureStore.setItemAsync('sltoken', data.token))
+      .then(async (data) => {await SecureStore.setItemAsync('sltoken', data.token);
+        navigation.navigate('Dashboard');} )
       .catch((error) => console.log(error.data.description));
-
-    navigation.navigate('Dashboard');
   };
 
   return (

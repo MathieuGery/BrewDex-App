@@ -6,7 +6,7 @@ import authServices from "../services/Auth";
 import { theme } from '../core/theme';
 import { ActivityIndicator } from "react-native-paper";
 
-export default function MyBarCodeScanner() {
+export default function MyBarCodeScanner () {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [beerInfos, setBeerInfos] = useState('');

@@ -1,15 +1,17 @@
 import React, { memo } from 'react';
-import Background from '../components/Background';
 import { Navigation } from '../types';
 import NavBar from "../components/NavBar";
-import {Text} from "react-native-paper";
+import Button from "../components/Button";
 
+import * as SecureStore from 'expo-secure-store';
 type Props = {
   navigation: Navigation;
 };
 
-const Dashboard = ({ navigation }: Props) => (
+const Dashboard = ({ navigation }: Props) => {
+  return (
     <NavBar/>
-);
+  )
+};
 
 export default memo(Dashboard);

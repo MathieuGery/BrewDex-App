@@ -4,10 +4,14 @@ import {StyleSheet, View} from "react-native";
 import Background from "./Background";
 import { theme } from '../core/theme';
 import MyBarCodeScanner from "./BarCodeScanner";
+import Settings from "../screens/Settings";
+import {Navigation} from "../types";$
 
-const MusicRoute = () => <Background><Text>Comix le bg</Text></Background>;
 const AlbumsRoute = () => <Text>Albums</Text>;
 
+type Props = {
+  navigation: Navigation;
+};
 type RoutesState = Array<{
   key: string;
   title: string;
@@ -19,7 +23,7 @@ type RoutesState = Array<{
 }>;
 type Route = { route: { key: string } };
 
-const MyNavBar = () => {
+const MyNavBar = ({navigation}: Props) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
     { key: 'home', title: 'Home', icon: 'home' },
@@ -33,9 +37,9 @@ const MyNavBar = () => {
       navigationState={{ index, routes }}
       onIndexChange={index => setIndex(index)}
       renderScene={BottomNavigation.SceneMap({
-        home: MusicRoute,
+        home: Settings,
         camera: MyBarCodeScanner,
-        compte: MusicRoute,
+        compte: AlbumsRoute,
       })}
       inactiveColor={theme.colors.primary}
       activeColor={theme.colors.primary}

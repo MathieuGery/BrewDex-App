@@ -5,19 +5,19 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
 import { Navigation } from '../types';
-import {BarCodeScanner} from "expo-barcode-scanner";
 import * as SecureStore from 'expo-secure-store';
+import Auth from "../services/Auth";
 
 type Props = {
   navigation: Navigation;
 };
 
 const HomeScreen = ({ navigation }: Props) => {
+  // @ts-ignore
   useEffect(() => {
     (async () => {
-      if (SecureStore.getItemAsync('sltoken')) {
-        navigation.navigate('Dashboard')
-      }
+      const userToken = await SecureStore.getItemAsync('sltoken');
+      navigation.navigate(userToken ? 'App': 'Auth');
     })();
   }, []);
 
