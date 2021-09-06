@@ -1,50 +1,45 @@
 import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
 import {StyleSheet, View} from "react-native";
-import Background from "./Background";
-import { theme } from '../core/theme';
+import Button from "./Button";
+import {theme} from "../core/theme";
 import MyBarCodeScanner from "./BarCodeScanner";
-import Settings from "../screens/Settings";
-import {Navigation} from "../types";
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Account from "../screens/AccountScreen";
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+const Tab = createMaterialBottomTabNavigator();
 
-type Props = {
-  navigation: Navigation;
-};
-type RoutesState = Array<{
-  key: string;
-  title: string;
-  icon: string;
-  color?: string;
-  badge?: boolean;
-  getAccessibilityLabel?: string;
-  getTestID?: string;
-}>;
-type Route = { route: { key: string } };
-
-const MyNavBar = ({navigation}: Props) => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState<RoutesState>([
-    { key: 'home', title: 'Home', icon: 'home' },
-    { key: 'camera', title: 'Camera', icon: 'camera' },
-    { key: 'compte', title: 'Compte', icon: 'account-circle-outline' },
-  ]);
+const MyNavBar = ({navigation, AuthContext}) => {
+  const { signOut } = React.useContext(AuthContext);
 
   return (
-    <BottomNavigation
+    <Tab.Navigator
       barStyle={styles.barStyle}
-      navigationState={{ index, routes }}
-      onIndexChange={index => setIndex(index)}
-      renderScene={BottomNavigation.SceneMap({
-        home: AlbumsRoute,
-        camera: MyBarCodeScanner,
-        compte: AlbumsRoute,
-      })}
-      inactiveColor={theme.colors.primary}
-      activeColor={theme.colors.primary}
-      sceneAnimationEnabled={false}
-    />
+      inactiveColor={theme.colors.secondary}
+      activeColor={theme.colors.primary}>
+      <Tab.Screen name="Home" options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home-circle-outline" color={color} size={26} />
+        ),
+      }}>
+        {props => <Account {...props} AuthContext={AuthContext} />}
+      </Tab.Screen>
+      <Tab.Screen name="Camera" component={MyBarCodeScanner} options={{
+        tabBarLabel: 'Camera',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="camera" color={color} size={26} />
+        ),
+      }}/>
+      <Tab.Screen name="AccountScreen" options={{
+        tabBarLabel: 'AccountScreen',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
+        ),
+      }}>
+        {props => <Account {...props} AuthContext={AuthContext} />}
+      </Tab.Screen>
+    </Tab.Navigator>
 
   );
 };

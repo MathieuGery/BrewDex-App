@@ -1,17 +1,32 @@
-import React, { memo } from 'react';
+import React, {memo, useState} from 'react';
 import { Navigation } from '../types';
 import NavBar from "../components/NavBar";
-import Button from "../components/Button";
+import {StyleSheet} from "react-native";
+import {theme} from "../core/theme";
 
-import * as SecureStore from 'expo-secure-store';
-type Props = {
-  navigation: Navigation;
+const Dashboard = ({ navigation, AuthContext }) => {
+    return (
+    <NavBar navigation={navigation}  AuthContext={AuthContext}/>
+  );
 };
 
-const Dashboard = ({ navigation }: Props) => {
-  return (
-    <NavBar/>
-  )
-};
+const styles = StyleSheet.create({
+  forgotPassword: {
+    width: '100%',
+    alignItems: 'flex-end',
+    marginBottom: 24,
+  },
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+  label: {
+    color: theme.colors.secondary,
+  },
+  link: {
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+});
 
 export default memo(Dashboard);

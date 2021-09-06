@@ -2,7 +2,7 @@ import request from './APIKit';
 import * as SecureStore from 'expo-secure-store'
 
 async function setHeader() {
-  const token = await SecureStore.getItemAsync('sltoken');
+  const token = await SecureStore.getItemAsync('userToken');
 
   return {
     Authorization: `Bearer ${token}`,

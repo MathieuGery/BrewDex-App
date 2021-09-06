@@ -31,7 +31,8 @@ export default function MyBarCodeScanner () {
       { product_id: data},
     )
       .then((data) => handleBeeInfos(data))
-      .catch((error) => console.log(error.data.description));
+      .catch((error) => {    setIsLoading(false);
+        alert(`Bar code with type and data ${error.data} has been scanned!`)});
   };
 
   if (hasPermission === null) {

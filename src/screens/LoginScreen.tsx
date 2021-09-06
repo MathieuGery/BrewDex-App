@@ -7,18 +7,18 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
-import * as SecureStore from 'expo-secure-store';
 import { emailValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
-import authServices from '../services/Auth';
 
 type Props = {
   navigation: Navigation;
 };
 
-const LoginScreen = ({ navigation }: Props) => {
+const LoginScreen = ({ navigation, AuthContext }) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
+
+  const { signIn } = React.useContext(AuthContext);
 
   const _onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
@@ -30,12 +30,6 @@ const LoginScreen = ({ navigation }: Props) => {
       console.log(email);
       return;
     }
-    await authServices.login(
-      { email: email.value, password: password.value},
-    )
-      .then(async (data) => {await SecureStore.setItemAsync('sltoken', data.token);
-        navigation.navigate('Dashboard');} )
-      .catch((error) => console.log(error.data.description));
   };
 
   return (
@@ -77,7 +71,7 @@ const LoginScreen = ({ navigation }: Props) => {
         </TouchableOpacity>
       </View>
 
-      <Button mode="contained" onPress={_onLoginPressed}>
+      <Button mode="contained" onPress={() => signIn({ email, password })}>
         Se connecter
       </Button>
 

@@ -21,7 +21,7 @@ const request = (options) => {
     console.debug('Request Failed:', error.config); // eslint-disable-line no-console
     if (error.response) {
       if (error.response.status === 401) {
-        SecureStore.deleteItemAsync('sltoken');
+        SecureStore.deleteItemAsync('userToken');
       }
       console.debug('Status:', error.response.status); // eslint-disable-line no-console
       console.debug('Data:', error.response.data); // eslint-disable-line no-console
