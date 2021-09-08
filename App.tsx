@@ -84,18 +84,19 @@ export default function Main(){
           .then(async (data) => {await SecureStore.setItemAsync('userToken', data.token);
             dispatch({ type: 'SIGN_IN', token: data.token });})
           .catch((error) => {
-          setIsVisible(true);
-          setErrorMessage(error.data.errors.message)});
+            setIsVisible(true);
+            setErrorMessage(error.data.errors.message)});
       },
       signOut: async () => {await SecureStore.deleteItemAsync('userToken');
         dispatch({ type: 'SIGN_OUT' })},
-      signUp: async (data) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
-
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      signUp: async (data, setIsVisible, setErrorMessage, navigation) => {
+        await authServices.register(
+          { email: data.email.value, password: data.password.value, name: data.name.value},
+        )
+          .then(async (data) => {navigation.navigate("LoginScreen")})
+          .catch((error) => {
+            setIsVisible(true);
+            setErrorMessage(error.data.message)});
       },
     }),
     []
@@ -128,7 +129,9 @@ export default function Main(){
               <Stack.Screen name="LoginScreen">
                 {props => <LoginScreen {...props} AuthContext={AuthContext} />}
               </Stack.Screen>
-              <Stack.Screen name="RegisterScreen" component={RegisterScreen}/>
+              <Stack.Screen name="RegisterScreen">
+                {props => <RegisterScreen {...props} AuthContext={AuthContext} />}
+              </Stack.Screen>
               <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen}/>
             </React.Fragment>
           ) : (

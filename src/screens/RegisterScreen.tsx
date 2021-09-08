@@ -13,19 +13,16 @@ import {
   passwordValidator,
   nameValidator,
 } from '../core/utils';
-import authServices from '../services/Auth';
 import MySnackBar from '../components/MySnackBar';
 
-type Props = {
-  navigation: Navigation;
-};
-
-const RegisterScreen = ({ navigation }: Props) => {
+const RegisterScreen = ({ navigation, AuthContext }) => {
   const [name, setName] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [ErrorMessage, setErrorMessage] = useState('');
   const [IsVisible, setIsVisible] = useState(false);
+
+  const { signUp } = React.useContext(AuthContext);
 
   const _onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
@@ -38,18 +35,7 @@ const RegisterScreen = ({ navigation }: Props) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    await authServices.register(
-      { email: email.value, password: password.value, name: name.value},
-    )
-      .then(() =>  {
-        console.log('Votre compte a bien été créer');
-        navigation.navigate('Dashboard');
-      })
-      .catch((error) => {
-          console.log("ICICICICICICIC", error.data.message);
-          setErrorMessage(error.data.message);
-          setIsVisible(true);
-      });
+    signUp({ email, name, password }, setIsVisible, setErrorMessage, navigation)
   };
 
   return (
