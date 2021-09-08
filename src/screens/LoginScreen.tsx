@@ -8,15 +8,13 @@ import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
-import { Navigation } from '../types';
-
-type Props = {
-  navigation: Navigation;
-};
+import MySnackBar from "../components/MySnackBar";
 
 const LoginScreen = ({ navigation, AuthContext }) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
+  const [IsVisible, setIsVisible] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState('');
 
   const { signIn } = React.useContext(AuthContext);
 
@@ -27,9 +25,9 @@ const LoginScreen = ({ navigation, AuthContext }) => {
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
-      console.log(email);
       return;
     }
+    signIn({ email, password }, setIsVisible, setErrorMessage)
   };
 
   return (
@@ -71,7 +69,7 @@ const LoginScreen = ({ navigation, AuthContext }) => {
         </TouchableOpacity>
       </View>
 
-      <Button mode="contained" onPress={() => signIn({ email, password })}>
+      <Button mode="contained" onPress={_onLoginPressed}>
         Se connecter
       </Button>
 
@@ -81,6 +79,7 @@ const LoginScreen = ({ navigation, AuthContext }) => {
           <Text style={styles.link}>Créer en un</Text>
         </TouchableOpacity>
       </View>
+      <MySnackBar message={ErrorMessage} isVisible={IsVisible} setIsVisible={setIsVisible}/>
     </Background>
   );
 };

@@ -77,14 +77,15 @@ export default function Main(){
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (data) => {
-        console.log(data.email.value, data.password.value)
+      signIn: async (data, setIsVisible, setErrorMessage) => {
         await authServices.login(
           { email: data.email.value, password: data.password.value},
         )
           .then(async (data) => {await SecureStore.setItemAsync('userToken', data.token);
             dispatch({ type: 'SIGN_IN', token: data.token });})
-          .catch((error) => console.log(error));
+          .catch((error) => {
+          setIsVisible(true);
+          setErrorMessage(error.data.errors.message)});
       },
       signOut: async () => {await SecureStore.deleteItemAsync('userToken');
         dispatch({ type: 'SIGN_OUT' })},
@@ -100,7 +101,6 @@ export default function Main(){
     []
   );
 
-  console.log(userToken)
   return (
     <Provider theme={theme}>
       <AuthContext.Provider value={authContext}>

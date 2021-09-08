@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Snackbar } from 'react-native-paper';
+import {theme} from "../core/theme";
 
 const MySnackBar = (props) => {
   const onDismissSnackBar = () => props.setIsVisible(false);
@@ -10,6 +11,7 @@ const MySnackBar = (props) => {
   onDismiss={onDismissSnackBar}
   action={{
     label: 'Fermer',
+    color: theme.colors.primary,
       onPress: () => {
       props.setIsVisible(false);
     },
