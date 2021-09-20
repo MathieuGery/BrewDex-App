@@ -4,7 +4,7 @@ import {theme} from "../core/theme";
 import MyBarCodeScanner from "./BarCodeScanner";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Account from "../screens/AccountScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import MainScreen from "../screens/MainScreen";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -33,7 +33,7 @@ const MyNavBar = ({AuthContext}) => {
           <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
         ),
       }}>
-        {props => <Account {...props} AuthContext={AuthContext} />}
+        {props => <SettingsScreen {...props} AuthContext={AuthContext} />}
       </Tab.Screen>
     </Tab.Navigator>
 
