@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import Background from "./Background";
+import Background from "./BackgroundAuth";
 import authServices from "../services/Auth";
 import { theme } from '../core/theme';
 import { ActivityIndicator } from "react-native-paper";
+import BeerCard from "./BeerCard";
 
 export default function MyBarCodeScanner () {
   const [hasPermission, setHasPermission] = useState(null);
@@ -43,23 +44,27 @@ export default function MyBarCodeScanner () {
   }
 
   return (
-    <Background>
+    <View style={styles.container}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
         <ActivityIndicator animating={isLoading} color={theme.colors.primary} size={'large'}/>
         {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-    </Background>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    position: 'absolute',
     overflow: 'hidden',
-    margin: 10,
-    marginHorizontal: 30,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    top: 0,
   },
+  button: {
+    flex:1
+  }
 });

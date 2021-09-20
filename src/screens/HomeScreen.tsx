@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import Background from '../components/Background';
+import Background from '../components/BackgroundAuth';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';

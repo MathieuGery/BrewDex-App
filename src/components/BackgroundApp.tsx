@@ -9,15 +9,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Background = ({ children }: Props) => (
+const BackgroundApp = ({ children }: Props) => (
   <ImageBackground
     source={require('../assets/background_dot.png')}
     resizeMode="repeat"
     style={styles.background}
   >
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      {children}
-    </KeyboardAvoidingView>
+    {children}
   </ImageBackground>
 );
 
@@ -26,15 +24,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  container: {
-    flex: 1,
-    padding: 20,
-    width: '100%',
-    maxWidth: 340,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });
 
-export default memo(Background);
+export default memo(BackgroundApp);

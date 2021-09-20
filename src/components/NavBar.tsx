@@ -1,30 +1,26 @@
 import * as React from 'react';
 import {StyleSheet, View} from "react-native";
-import Button from "./Button";
 import {theme} from "../core/theme";
 import MyBarCodeScanner from "./BarCodeScanner";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Account from "../screens/AccountScreen";
+import MainScreen from "../screens/MainScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MyNavBar = ({navigation, AuthContext}) => {
-  const { signOut } = React.useContext(AuthContext);
-
+const MyNavBar = ({AuthContext}) => {
   return (
     <Tab.Navigator
       barStyle={styles.barStyle}
       inactiveColor={theme.colors.secondary}
       activeColor={theme.colors.primary}>
-      <Tab.Screen name="Home" options={{
+      <Tab.Screen name="Home" component={MainScreen} options={{
         tabBarLabel: 'Home',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home-circle-outline" color={color} size={26} />
         ),
-      }}>
-        {props => <Account {...props} AuthContext={AuthContext} />}
-      </Tab.Screen>
+      }}/>
       <Tab.Screen name="Camera" component={MyBarCodeScanner} options={{
         tabBarLabel: 'Camera',
         tabBarIcon: ({ color }) => (
