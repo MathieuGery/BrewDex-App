@@ -21,6 +21,12 @@ const MyNavBar = ({AuthContext}) => {
           <MaterialCommunityIcons name="home-circle-outline" color={color} size={26} />
         ),
       }}/>
+      <Tab.Screen name="SearchScreen" component={MyBarCodeScanner} options={{
+        tabBarLabel: 'Recherche',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="magnify" color={color} size={26} />
+        ),
+      }}/>
       <Tab.Screen name="Camera" component={MyBarCodeScanner} options={{
         tabBarLabel: 'Camera',
         tabBarIcon: ({ color }) => (
@@ -28,9 +34,17 @@ const MyNavBar = ({AuthContext}) => {
         ),
       }}/>
       <Tab.Screen name="AccountScreen" options={{
-        tabBarLabel: 'AccountScreen',
+        tabBarLabel: 'Mon compte',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
+        ),
+      }}>
+        {props => <SettingsScreen {...props} AuthContext={AuthContext} />}
+      </Tab.Screen>
+      <Tab.Screen name="SettingsScreen" options={{
+        tabBarLabel: 'Paramètre',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="cog-outline" color={color} size={26} />
         ),
       }}>
         {props => <SettingsScreen {...props} AuthContext={AuthContext} />}

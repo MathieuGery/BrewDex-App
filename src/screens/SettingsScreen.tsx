@@ -6,6 +6,7 @@ import {StyleSheet, View} from "react-native";
 import {theme} from "../core/theme";
 import {green50} from "react-native-paper/lib/typescript/styles/colors";
 import ButtonCard from "../components/ButtonCard";
+import NotificationSwitch from "../components/NotificationSwitch";
 
 const SettingsScreen = ({ AuthContext }) => {
   const { signOut } = React.useContext(AuthContext);
@@ -16,8 +17,17 @@ const SettingsScreen = ({ AuthContext }) => {
         <Headline>Paramètres</Headline>
         <Text>Vous pouvez modifier les paramètres ici</Text>
       </View>
-      
-      <ButtonCard icon={"power"} text={"Déconnexion"}/>
+      <View style={styles.container2}>
+        <Card style={styles.cardd}>
+          <Card.Title title="Globale"/>
+          <NotificationSwitch/>
+          <Card.Content>
+            <Title>Aide/Contact</Title>
+            <Paragraph>Aide contact</Paragraph>
+          </Card.Content>
+        </Card>
+        <ButtonCard icon={"power"} text={"Déconnexion"} AuthContext={AuthContext}/>
+      </View>
     </Background>
   )
 };
@@ -30,5 +40,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     backgroundColor: theme.colors.primary,
   },
+  container2: {
+    flex: 1,
+    marginTop: "-10%",
+    flexDirection: "column",
+    marginHorizontal: "5%"
+  },
+  cardd: {
+    borderRadius: 20,
+    elevation: 10,
+  }
 })
 export default memo(SettingsScreen);
