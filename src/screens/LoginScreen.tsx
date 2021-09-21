@@ -9,11 +9,13 @@ import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
 import MySnackBar from "../components/MySnackBar";
+import {ActivityIndicator} from "react-native-paper";
 
 const LoginScreen = ({ navigation, AuthContext }) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
-  const [IsVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState('');
 
   const { signIn } = React.useContext(AuthContext);
@@ -27,7 +29,8 @@ const LoginScreen = ({ navigation, AuthContext }) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    signIn({ email, password }, setIsVisible, setErrorMessage)
+    setIsLoading(true)
+    signIn({ email, password }, setIsVisible, setIsLoading, setErrorMessage)
   };
 
   return (
@@ -79,7 +82,10 @@ const LoginScreen = ({ navigation, AuthContext }) => {
           <Text style={styles.link}>Créer en un</Text>
         </TouchableOpacity>
       </View>
-      <MySnackBar message={ErrorMessage} isVisible={IsVisible} setIsVisible={setIsVisible}/>
+      <MySnackBar message={ErrorMessage} isVisible={isVisible} setIsVisible={setIsVisible}/>
+      {isLoading &&
+        <ActivityIndicator size={100} animating={true} color={theme.colors.primary}/>
+      }
     </Background>
   );
 };

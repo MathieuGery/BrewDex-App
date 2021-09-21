@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   button: {
-    backgroundColor: theme.colors.primary
+    backgroundColor: theme.colors.primary,
+    marginVertical: '-0.5%'
   },
   row: {
     flexDirection: "row",

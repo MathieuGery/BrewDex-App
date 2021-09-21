@@ -17,6 +17,7 @@ const SettingsScreen = ({ AuthContext }) => {
         <Headline>Paramètres</Headline>
         <Text>Vous pouvez modifier les paramètres ici</Text>
       </View>
+
       <View style={styles.container2}>
         <Card style={styles.cardd}>
           <Card.Title title="Globale"/>
@@ -28,6 +29,7 @@ const SettingsScreen = ({ AuthContext }) => {
         </Card>
         <ButtonCard icon={"power"} text={"Déconnexion"} AuthContext={AuthContext}/>
       </View>
+
     </Background>
   )
 };
