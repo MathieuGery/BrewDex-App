@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     marginTop: "5%",
     elevation: 5,
+    borderRadius: 20,
     backgroundColor: theme.colors.primary
   },
   cardContent: {
