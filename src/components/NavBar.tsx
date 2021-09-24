@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SettingsScreen from "../screens/SettingsScreen";
 import MainScreen from "../screens/MainScreen";
+import SearchScreen from "../screens/SearchScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,12 +22,14 @@ const MyNavBar = ({AuthContext}) => {
           <MaterialCommunityIcons name="home-circle-outline" color={color} size={26} />
         ),
       }}/>
-      <Tab.Screen name="SearchScreen" component={MyBarCodeScanner} options={{
+      <Tab.Screen name="SearchScreen" options={{
         tabBarLabel: 'Recherche',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="magnify" color={color} size={26} />
         ),
-      }}/>
+      }}>
+        {props => <SearchScreen {...props} AuthContext={AuthContext} />}
+      </Tab.Screen>
       <Tab.Screen name="Camera" component={MyBarCodeScanner} options={{
         tabBarLabel: 'Camera',
         tabBarIcon: ({ color }) => (
