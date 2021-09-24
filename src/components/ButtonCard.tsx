@@ -6,12 +6,13 @@ import {theme} from "../core/theme";
 
 const ButtonCard = ({...props}) => {
   const {signOut} = React.useContext(props.AuthContext);
+
   return (
     <Card style={styles.card}>
       <Card.Content style={styles.row}>
         <IconButton
           icon={props.icon}
-          color={theme.colors.grey}
+          color={theme.colors.error}
           size={30}
           style={styles.button}
           onPress={signOut}
@@ -25,11 +26,12 @@ const ButtonCard = ({...props}) => {
 const styles = StyleSheet.create({
   card: {
     marginTop: "10%",
-    elevation: 10,
+    marginBottom: "10%",
+    elevation: 2,
     borderRadius: 20,
   },
   button: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.grey,
     marginVertical: '-0.5%'
   },
   row: {
@@ -37,7 +39,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   paragraph: {
-   marginLeft: "50%"
+   marginLeft: "1%",
+    color: theme.colors.error
   }
 })
 

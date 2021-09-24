@@ -4,6 +4,7 @@ import {Image, StyleSheet} from "react-native";
 
 const LeftContent = props => <Avatar.Image {...props} source={{ uri: 'https://picsum.photos/700' }} />
 const RightContent = props => <Image {...props} style={styles.tinyLogo} source={{uri: 'https://picsum.photos/700'}}/>
+
 export default function BeerCard() {
 
   return (
@@ -23,17 +24,18 @@ export default function BeerCard() {
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 40,
+    marginRight: 40,
+    marginLeft: 20,
     marginTop: 50,
     flex: 0,
     elevation: 10,
-    borderRadius: 20,
+    borderRadius: 12,
   },
   rightContent: {
     position: "absolute",
     left: '90%',
     height: -10,
-    paddingBottom: 80
+    paddingBottom: 80,
   },
   tinyLogo: {
     width: 70,
