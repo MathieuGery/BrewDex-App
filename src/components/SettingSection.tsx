@@ -4,7 +4,7 @@ import {Button, Card, IconButton, Paragraph, TouchableRipple} from "react-native
 import {theme} from "../core/theme";
 
 
-const SetingSection = ({...props}) => {
+const SettingSection = ({...props}) => {
   return (
     <Card style={styles.card} onPress={() => console.log("pressed")}>
     <TouchableRipple
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default memo(SetingSection);
+export default memo(SettingSection);
