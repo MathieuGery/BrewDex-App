@@ -1,11 +1,10 @@
 import React, {memo} from "react";
 import Background from "../components/BackgroundApp";
-import {ScrollView, StatusBar, StyleSheet, View} from "react-native";
-import {Avatar, Divider, Text} from "react-native-paper";
+import {ScrollView, StyleSheet, View} from "react-native";
+import {Avatar, Text} from "react-native-paper";
 import ProfileStats from "../components/ProfileStats";
-import Header from "../components/Header";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import {theme} from "../core/theme";
+import MainScreen from "./MainScreen";
 
 function loul() {
   return (
@@ -43,12 +42,12 @@ const AccountScreen = ({ AuthContext }) => {
             <ProfileStats/>
           </View>
           <View style={styles.description}>
-            <Text>Description</Text>
+            <Text style={{fontWeight: 'bold'}}>Description</Text>
+            <Text>Lorem ipsum afndnfnqsnjdkfnq sueesfn</Text>
           </View>
-          <Text>Lorem ipsum afndnfnqsnjdkfnq suefuqsefu qsuefnsdfdjksf sjkfesefs ifes sfnfdsksfkesf esjnfskfdskjfsne fkjdskjf skjfensjf esfn</Text>
         </View>
         <Tab.Navigator style={styles.tab}>
-          <Tab.Screen name="Favorites" component={loul} />
+          <Tab.Screen name="Favorites" component={MainScreen} />
           <Tab.Screen name="Collection" component={loul1} />
         </Tab.Navigator>
     </Background>
@@ -57,11 +56,11 @@ const AccountScreen = ({ AuthContext }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: "white",
     marginTop: "30%",
+    marginBottom: 0,
     margin: "2%",
   },
   container1: {
@@ -77,9 +76,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   description: {
+    marginHorizontal: "4%",
     alignItems: "flex-start"
   },
   tab: {
+    marginHorizontal: "2%",
     flex: 1
   }
 })

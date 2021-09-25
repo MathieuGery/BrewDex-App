@@ -6,24 +6,23 @@ import {theme} from "../core/theme";
 const ProfileStats = () => {
   return (
     <View style={[styles.container, {
-      // Try setting `flexDirection` to `"row"`.
       flexDirection: "row"
     }]}>
       <Card style={styles.cards}>
         <Card.Content style={styles.cardContent}>
-          <Title>100</Title>
+          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>100</Title>
           <Paragraph>Scans</Paragraph>
         </Card.Content>
       </Card>
       <Card style={styles.cards}>
         <Card.Content style={styles.cardContent}>
-          <Title>34</Title>
+          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>34</Title>
           <Paragraph>Favorites</Paragraph>
         </Card.Content>
       </Card>
       <Card style={styles.cards}>
         <Card.Content style={styles.cardContent}>
-          <Title>10</Title>
+          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>10</Title>
           <Paragraph>Followers</Paragraph>
         </Card.Content>
       </Card>
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     elevation: 5,
     borderRadius: 20,
-    backgroundColor: theme.colors.primary
   },
   cardContent: {
     height: 90,
