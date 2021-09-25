@@ -6,34 +6,33 @@ import {theme} from "../core/theme";
 
 const SettingSection = ({...props}) => {
   return (
-    <Card style={styles.card} onPress={() => console.log("pressed")}>
     <TouchableRipple
       onPress={() => console.log('Pressed')}
-      rippleColor={theme.colors.primary}
+      rippleColor={"white"}
+      style={styles.touchableRipple}
     >
+    <Card onPress={() => console.log("pressed")} style={{borderRadius: 12}}>
     <Card.Content style={styles.row}>
       <IconButton
         icon={props.icon}
         color={theme.colors.grey}
-        size={30}
-        style={styles.button}
+        size={20}
+        style={styles.icon}
       />
       <Paragraph style={styles.paragraph}>{props.text}</Paragraph>
       <Button style={styles.arrow} icon="chevron-right" mode="text"> </Button>
     </Card.Content>
-    </TouchableRipple>
     </Card>
+    </TouchableRipple>
   )
 };
 
 const styles = StyleSheet.create({
   row: {
-    paddingTop: '2%',
-    paddingBottom: '2%',
     flexDirection: "row",
     alignItems: "center",
   },
-  button: {
+  icon: {
     backgroundColor: theme.colors.primary,
     marginVertical: '-0.5%'
   },
@@ -41,13 +40,12 @@ const styles = StyleSheet.create({
     marginLeft: "1%"
   },
   arrow: {
-    paddingLeft: "45%",
+    position: "absolute",
+    alignItems: "center",
+    width: "210%",
   },
-  card: {
-    borderRadius: 15,
-    elevation: 1,
+  touchableRipple: {
     marginHorizontal: '3%',
-    marginVertical: '2%',
     paddingVertical: '2%'
   }
 })

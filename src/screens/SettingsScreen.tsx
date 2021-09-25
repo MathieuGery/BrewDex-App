@@ -20,8 +20,8 @@ const SettingsScreen = ({ AuthContext }) => {
           <SettingSection icon={"bell-outline"} text={"Notifications"}/>
           <Card.Title title="Aide/Contact"/>
           <SettingSection icon={"email-outline"} text={"Contact"}/>
+          <SettingSection icon={"shield-check-outline"} text={"Condition Général"}/>
           <SettingSection icon={"gift-outline"} text={"Soutenir l'application"}/>
-
         </Card>
         <ButtonCard icon={"power"} text={"Déconnexion"} AuthContext={AuthContext}/>
       </View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 20,
-    elevation: 2
+    elevation: 2,
   }
 })
 export default memo(SettingsScreen);
