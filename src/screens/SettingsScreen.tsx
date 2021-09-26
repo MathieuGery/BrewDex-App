@@ -17,6 +17,7 @@ const SettingsScreen = ({ AuthContext }) => {
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Card.Title title="Globale"/>
+          <SettingSection icon={"account-circle-outline"} text={"Compte"}/>
           <SettingSection icon={"bell-outline"} text={"Notifications"}/>
           <Card.Title title="Aide/Contact"/>
           <SettingSection icon={"email-outline"} text={"Contact"}/>
