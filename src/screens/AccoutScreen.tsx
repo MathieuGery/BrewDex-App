@@ -1,20 +1,17 @@
 import React, {memo} from "react";
 import Background from "../components/BackgroundApp";
 import {ListRenderItem, StatusBar, StyleSheet, View} from "react-native";
-import {Avatar, Text} from "react-native-paper";
+import {Avatar, Card, Text} from "react-native-paper";
 import ProfileStats from "../components/ProfileStats";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import MainScreen from "./MainScreen";
-
 import { Tabs } from 'react-native-collapsible-tab-view'
-import {theme} from "../core/theme";
 import BeerCardAccount from "../components/BeerCardAccount";
 
 const HEADER_HEIGHT = 400
 
 const Header = () => {
   return (
-    <View style={styles.container} pointerEvents={'box-none'}>
+    <Background>
+    <Card style={styles.container} pointerEvents={'box-none'}>
       <View style={styles.container1}>
         <Avatar.Image size={100} source={{ uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y' }} style={styles.avatar}/>
         <Text style={styles.userName}>Jhone Doe</Text>
@@ -28,7 +25,8 @@ const Header = () => {
         <Text style={{fontWeight: 'bold'}}>Description</Text>
         <Text>Lorem ipsum afndnfnqsnjdkfnq sueesfn</Text>
       </View>
-    </View>
+    </Card>
+    </Background>
 
   )
 }
@@ -77,10 +75,10 @@ const styles = StyleSheet.create({
   container: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderColor: theme.colors.primary,
-    borderWidth: 1,
-    borderBottomColor: "white",
+    // borderColor: theme.colors.primary,
     backgroundColor: "white",
+    elevation: 12,
+    borderWidth: 1,
     marginTop: "30%",
     marginBottom: 0,
     margin: "2%",
@@ -101,17 +99,6 @@ const styles = StyleSheet.create({
     marginHorizontal: "4%",
     alignItems: "flex-start"
   },
-
-  box: {
-    height: 250,
-    width: '100%',
-  },
-  boxA: {
-    backgroundColor: 'white',
-  },
-  boxB: {
-    backgroundColor: '#D8D8D8',
-  },
   header: {
     height: HEADER_HEIGHT,
     width: '100%',
@@ -120,3 +107,5 @@ const styles = StyleSheet.create({
 })
 
 export default memo(AccountScreen);
+
+
