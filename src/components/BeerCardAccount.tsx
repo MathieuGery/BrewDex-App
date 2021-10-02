@@ -8,7 +8,7 @@ const RightContent = props => <Image {...props} style={styles.image} source={{ur
 export default function BeerCardAccount() {
 
   return (
-    <Card style={styles.card}>
+    <Card style={styles.card} onPress={() => console.log("C'est préssé")}>
       <Card.Content style={{paddingBottom: 5}}>
         <Image style={styles.image} source={{uri: 'https://picsum.photos/700'}}/>
         <Title>toto</Title>
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: "2%",
-    elevation: 10,
     borderRadius: 12,
     width: 180
   },
