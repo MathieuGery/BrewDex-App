@@ -6,12 +6,7 @@ import {theme} from "../core/theme";
 
 const SettingSection = ({...props}) => {
   return (
-    <TouchableRipple
-      onPress={() => console.log('Pressed')}
-      rippleColor={"white"}
-      style={styles.touchableRipple}
-    >
-    <Card onPress={() => console.log("pressed")} style={{borderRadius: 12}}>
+    <Card onPress={() => props.navigation.navigate(props.goto)} style={styles.touchableRipple}>
     <Card.Content style={styles.row}>
       <IconButton
         icon={props.icon}
@@ -23,7 +18,6 @@ const SettingSection = ({...props}) => {
       <Button style={styles.arrow} icon="chevron-right" mode="text"> </Button>
     </Card.Content>
     </Card>
-    </TouchableRipple>
   )
 };
 
@@ -46,7 +40,8 @@ const styles = StyleSheet.create({
   },
   touchableRipple: {
     marginHorizontal: '3%',
-    paddingVertical: '2%'
+    marginVertical: '2%',
+    borderRadius: 12
   }
 })
 

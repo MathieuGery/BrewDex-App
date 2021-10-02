@@ -7,11 +7,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SettingsScreen from "../screens/SettingsScreen";
 import MainScreen from "../screens/MainScreen";
 import SearchScreen from "../screens/SearchScreen";
-import AccountScreen from "../screens/AccoutScreen";
+import AccountScreen from "../screens/AccountScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MyNavBar = ({AuthContext}) => {
+const MyNavBar = ({navigation, AuthContext}) => {
   return (
     <Tab.Navigator
       barStyle={styles.barStyle}
@@ -43,7 +43,7 @@ const MyNavBar = ({AuthContext}) => {
           <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
         ),
       }}>
-        {props => <AccountScreen {...props} AuthContext={AuthContext} />}
+        {props => <AccountScreen />}
       </Tab.Screen>
       <Tab.Screen name="SettingsScreen" options={{
         tabBarLabel: 'Paramètre',
@@ -51,7 +51,7 @@ const MyNavBar = ({AuthContext}) => {
           <MaterialCommunityIcons name="cog-outline" color={color} size={26} />
         ),
       }}>
-        {props => <SettingsScreen {...props} AuthContext={AuthContext} />}
+        {props => <SettingsScreen {...props} navigation={navigation} AuthContext={AuthContext} />}
       </Tab.Screen>
     </Tab.Navigator>
 

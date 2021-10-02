@@ -6,7 +6,7 @@ import {theme} from "../core/theme";
 
 const Dashboard = ({ navigation, AuthContext }) => {
     return (
-    <NavBar AuthContext={AuthContext}/>
+    <NavBar navigation={navigation} AuthContext={AuthContext}/>
   );
 };
 
