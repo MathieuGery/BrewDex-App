@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native Paper Login Template",
-    "slug": "react-native-paper-login-template",
+    "name": "Beerdex",
+    "slug": "Beerdex",
     "privacy": "public",
     "platforms": [
       "ios",

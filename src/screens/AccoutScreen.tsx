@@ -8,6 +8,7 @@ import MainScreen from "./MainScreen";
 
 import { Tabs } from 'react-native-collapsible-tab-view'
 import {theme} from "../core/theme";
+import BeerCardAccount from "../components/BeerCardAccount";
 
 const HEADER_HEIGHT = 400
 
@@ -35,7 +36,9 @@ const Header = () => {
 const AccountScreen: React.FC = () => {
   const renderItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
-      <View style={[styles.box, index % 2 === 0 ? styles.boxB : styles.boxA]} />
+      <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+        <BeerCardAccount/>
+      </View>
     )
   }, [])
 
@@ -45,19 +48,25 @@ const AccountScreen: React.FC = () => {
         renderHeader={Header}
         headerHeight={HEADER_HEIGHT}
         revealHeaderOnScroll={false}
+        minHeaderHeight={20}
       >
-        <Tabs.Tab name="A" >
+        <Tabs.Tab name="Favorites">
+          <Tabs.FlatList
+            data={[0, 1, 2, 3, 4]}
+            renderItem={renderItem}
+            numColumns={2}
+            keyExtractor={(v) => v + ''}
+            style={{marginBottom: "25%"}}
+          />
+        </Tabs.Tab>
+        <Tabs.Tab name="Collection">
           <Tabs.FlatList
             data={[0, 1, 2, 3, 4]}
             renderItem={renderItem}
             keyExtractor={(v) => v + ''}
+            numColumns={2}
+            style={{marginBottom: "25%"}}
           />
-        </Tabs.Tab>
-        <Tabs.Tab name="B" activeColor={"red"}>
-          <Tabs.ScrollView>
-            <View style={[styles.box, styles.boxA]} />
-            <View style={[styles.box, styles.boxB]} />
-          </Tabs.ScrollView>
         </Tabs.Tab>
       </Tabs.Container>
     </Background>
