@@ -18,7 +18,7 @@ const SettingsScreen = ({ navigation, AuthContext }) => {
         <Card style={styles.card}>
           <Card.Title title="Globale"/>
           <SettingSection icon={"account-circle-outline"} text={"Compte"} navigation={navigation} goto={"AccountSettingsScreen"}/>
-          <SettingSection icon={"bell-outline"} text={"Notifications"} navigation={navigation} goto={"AccountSettingsScreen"}/>
+          <SettingSection icon={"bell-outline"} text={"Notifications"} navigation={navigation} goto={"NotificationsSettingsScreen"}/>
           <Card.Title title="Aide/Contact"/>
           <SettingSection icon={"email-outline"} text={"Contact"} navigation={navigation} goto={"AccountSettingsScreen"}/>
           <SettingSection icon={"shield-check-outline"} text={"Condition Général"} navigation={navigation} goto={"AccountSettingsScreen"}/>

@@ -8,6 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import {View} from "react-native";
 import authServices from "./src/services/Auth";
 import AccountSettingsScreen from "./src/screens/settings/AccountSettingsScreen";
+import NotificationsSettingsScreen from "./src/screens/settings/NotificationsSettingsScreen";
 
 // @ts-ignore
 const AuthContext = React.createContext();
@@ -140,11 +141,14 @@ export default function Main(){
           ) : (
             // User is signed in
             <React.Fragment>
-            <Stack.Screen name="Dashboard">
-              {props => <Dashboard {...props} AuthContext={AuthContext} />}
-            </Stack.Screen>
+              <Stack.Screen name="Dashboard">
+                {props => <Dashboard {...props} AuthContext={AuthContext} />}
+              </Stack.Screen>
               <Stack.Screen name="AccountSettingsScreen">
                 {props => <AccountSettingsScreen {...props} />}
+              </Stack.Screen>
+              <Stack.Screen name="NotificationsSettingsScreen">
+                {props => <NotificationsSettingsScreen {...props}/>}
               </Stack.Screen>
             </React.Fragment>
           )}

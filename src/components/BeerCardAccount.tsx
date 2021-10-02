@@ -2,9 +2,6 @@ import {Avatar, Badge, Button, Card, Paragraph, Text, Title} from "react-native-
 import React, {memo} from "react";
 import {Image, StyleSheet} from "react-native";
 
-const LeftContent = props => <Avatar.Image {...props} source={{ uri: 'https://picsum.photos/700' }} />
-const RightContent = props => <Image {...props} style={styles.image} source={{uri: 'https://picsum.photos/700'}}/>
-
 export default function BeerCardAccount() {
 
   return (
