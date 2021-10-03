@@ -144,10 +144,10 @@ export default function Main(){
               <Stack.Screen name="Dashboard">
                 {props => <Dashboard {...props} AuthContext={AuthContext} />}
               </Stack.Screen>
-              <Stack.Screen name="AccountSettingsScreen">
+              <Stack.Screen name="AccountSettingsScreen" options={{animation: "slide_from_right"}}>
                 {props => <AccountSettingsScreen {...props} />}
               </Stack.Screen>
-              <Stack.Screen name="NotificationsSettingsScreen">
+              <Stack.Screen name="NotificationsSettingsScreen" options={{animation: "slide_from_right"}}>
                 {props => <NotificationsSettingsScreen {...props}/>}
               </Stack.Screen>
             </React.Fragment>

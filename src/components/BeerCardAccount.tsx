@@ -2,16 +2,15 @@ import {Avatar, Badge, Button, Card, Paragraph, Text, Title} from "react-native-
 import React, {memo} from "react";
 import {Image, StyleSheet} from "react-native";
 
-export default function BeerCardAccount() {
-
+export default function BeerCardAccount({comment}) {
   return (
     <Card style={styles.card} onPress={() => console.log("C'est préssé")}>
       <Card.Content style={{paddingBottom: 5}}>
         <Image style={styles.image} source={{uri: 'https://picsum.photos/700'}}/>
         <Title>toto</Title>
-        <Paragraph>comentaires</Paragraph>
-        <Paragraph style={{textAlign: "right", fontWeight: "100"}}>10/20/2021</Paragraph>
+        <Paragraph numberOfLines={3} style={{marginBottom: "20%"}}>{comment}</Paragraph>
       </Card.Content>
+        <Paragraph style={styles.date}>10/20/2021</Paragraph>
     </Card>
   )
 }
@@ -34,4 +33,12 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 20
   },
+  date: {
+    position: "absolute",
+    width: "96%",
+    bottom: 0,
+    textAlign: "right",
+    fontWeight: "100",
+    fontSize: 10
+  }
 })

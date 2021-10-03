@@ -3,20 +3,21 @@ import { StyleSheet, View} from "react-native";
 import {Card, Paragraph, Text, Title} from "react-native-paper";
 import {theme} from "../core/theme";
 
-const ProfileStats = () => {
+const ProfileStats = ({stats}) => {
+  console.log(stats)
   return (
     <View style={[styles.container, {
       flexDirection: "row"
     }]}>
       <Card style={styles.cards}>
         <Card.Content style={styles.cardContent}>
-          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>100</Title>
+          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>{stats.total_scanned_beers}</Title>
           <Paragraph>Scans</Paragraph>
         </Card.Content>
       </Card>
       <Card style={styles.cards}>
         <Card.Content style={styles.cardContent}>
-          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>34</Title>
+          <Title style={{color: theme.colors.primary, fontWeight: "bold"}}>{stats.favorite_beers}</Title>
           <Paragraph>Favorites</Paragraph>
         </Card.Content>
       </Card>

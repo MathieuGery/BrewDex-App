@@ -36,10 +36,22 @@ async function getBeerInfos(data) {
   });
 }
 
+async function getConnectedUserInfos() {
+  const headers = await setHeader();
+
+  return request({
+    url: '/auth/connected_user_infos',
+    method: 'GET',
+    headers,
+  });
+}
+
+
 const authServices = {
   register,
   login,
-  getBeerInfos
+  getBeerInfos,
+  getConnectedUserInfos
 };
 
 export default authServices;

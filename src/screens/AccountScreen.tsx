@@ -1,25 +1,35 @@
-import React, {memo} from "react";
+import React, {memo, useEffect} from "react";
 import Background from "../components/BackgroundApp";
 import {ListRenderItem, StatusBar, StyleSheet, View} from "react-native";
 import {Avatar, Card, Text} from "react-native-paper";
 import ProfileStats from "../components/ProfileStats";
 import { Tabs } from 'react-native-collapsible-tab-view'
 import BeerCardAccount from "../components/BeerCardAccount";
+import {BarCodeScanner} from "expo-barcode-scanner";
+import authServices from "../services/Auth";
 
 const HEADER_HEIGHT = 400
 
 const Header = () => {
+  const [userInfos, setUserInfos] = React.useState({});
+
+  useEffect(() => {
+    (async () => {
+      await authServices.getConnectedUserInfos().then((resp) => setUserInfos(resp.user));
+    })();
+  }, []);
+
   return (
     <Background>
     <Card style={styles.container} pointerEvents={'box-none'}>
       <View style={styles.container1}>
         <Avatar.Image size={100} source={{ uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y' }} style={styles.avatar}/>
-        <Text style={styles.userName}>Jhone Doe</Text>
+        <Text style={styles.userName}>{userInfos.name}</Text>
         <View style={{flexDirection: "row"}}>
           <Text style={{fontWeight: 'bold'}}>Lille</Text>
           <Text>, France</Text>
         </View>
-        <ProfileStats/>
+        <ProfileStats stats={userInfos}/>
       </View>
       <View style={styles.description}>
         <Text style={{fontWeight: 'bold'}}>Description</Text>
@@ -32,10 +42,18 @@ const Header = () => {
 }
 
 const AccountScreen: React.FC = () => {
+  const [userInfos, setUserInfos] = React.useState({});
+
+  useEffect(() => {
+    (async () => {
+      await authServices.getConnectedUserInfos().then((resp) => {setUserInfos(resp.user);  console.log(userInfos.beers)});
+    })();
+  }, []);
+
   const renderItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
       <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-        <BeerCardAccount/>
+        <BeerCardAccount comment={index}/>
       </View>
     )
   }, [])
@@ -50,10 +68,14 @@ const AccountScreen: React.FC = () => {
       >
         <Tabs.Tab name="Favorites">
           <Tabs.FlatList
-            data={[0, 1, 2, 3, 4]}
-            renderItem={renderItem}
+            data={userInfos.beers}
+            renderItem={({ item }) => (
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                <BeerCardAccount comment={item.comment}/>
+              </View>
+            )}
             numColumns={2}
-            keyExtractor={(v) => v + ''}
+            keyExtractor={item => item.code}
             style={{marginBottom: "25%"}}
           />
         </Tabs.Tab>
