@@ -1,6 +1,6 @@
 import React, {memo, useEffect} from 'react';
-import {Platform, StyleSheet, View} from "react-native";
-import {Avatar, Button, Card, Headline, IconButton, Text} from "react-native-paper";
+import {ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View} from "react-native";
+import {ActivityIndicator, Avatar, Button, Card, Headline, IconButton, Text} from "react-native-paper";
 import BackButton from "../../components/BackButton";
 import {theme} from "../../core/theme";
 import BackgroundApp from "../../components/BackgroundApp";
@@ -14,6 +14,7 @@ import MySnackBar from "../../components/MySnackBar";
 
 const AccountSettingsScreen = ({ navigation }) => {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [userInfos, setUserInfos] = React.useState({
     name: undefined
   });
@@ -60,15 +61,21 @@ const AccountSettingsScreen = ({ navigation }) => {
         setLocation(resp.user.location);
         setDescription(resp.user.description);
         setCountry(resp.user.country);
+        setIsLoading(false);
       });
     })();
   }, []);
 
   return (
-    <BackgroundApp>
+    <ImageBackground
+      source={require('../../assets/background_dot.png')}
+      resizeMode="repeat"
+      style={{width: "100%"}}
+    >
       <SettingHeader navigation={navigation} title={"Compte"} subtitle={"Modifer les paramètres de votre compte"}/>
       <MySnackBar message={"Informations mises à jour"} isVisible={isVisible} setIsVisible={setIsVisible}/>
-      <View style={styles.cardContainer}>
+      {isLoading ?  <ActivityIndicator size={100} animating={true} color={theme.colors.primary} style={{margin: "20%"}}/> :
+      <KeyboardAvoidingView style={styles.cardContainer} behavior="height" keyboardVerticalOffset={200}>
         <Card style={styles.card}>
           <Card.Title title="Globale"/>
           <Card.Content>
@@ -140,8 +147,8 @@ const AccountSettingsScreen = ({ navigation }) => {
             </Card>
           </Card.Content>
         </Card>
-      </View>
-    </BackgroundApp>
+      </KeyboardAvoidingView>}
+    </ImageBackground>
   );
 };
 

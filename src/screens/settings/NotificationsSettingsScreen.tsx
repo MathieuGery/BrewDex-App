@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useEffect} from 'react';
 import {StyleSheet, View} from "react-native";
 import BackgroundApp from "../../components/BackgroundApp";
 import SettingHeader from "../../components/settings/SettingHeader";
@@ -6,14 +6,26 @@ import {Button, Card, IconButton, Paragraph, Switch} from "react-native-paper";
 import SettingSection from "../../components/SettingSection";
 import SettingsSubSection from "../../components/settings/SettingsSubSection";
 import {theme} from "../../core/theme";
+import authServices from "../../services/Auth";
 
 
 
 
 const NotificationsSettingsScreen = ({ navigation }) => {
-  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-
+  const [isSwitchOn, setIsSwitchOn] = React.useState(Boolean);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+  const _updateInfos = async () => {
+    setIsSwitchOn(!isSwitchOn);
+    console.log(!isSwitchOn)
+    await authServices.editUserInfos({'notifications': !isSwitchOn}).then((resp) => {console.log(resp.user.notifications)});
+  };
+
+  useEffect(() => {
+    (async () => {
+      await authServices.getConnectedUserInfos().then((resp) => setIsSwitchOn(resp.user.notifications));
+    })();
+  }, []);
 
   return (
     <BackgroundApp>
@@ -24,7 +36,7 @@ const NotificationsSettingsScreen = ({ navigation }) => {
           <SettingsSubSection
             icon={"bell-outline"}
             text={"Activer/Désactiver"}
-            rightContent={<Switch value={isSwitchOn} onValueChange={onToggleSwitch} color={theme.colors.primary}/>}/>
+            rightContent={<Switch value={isSwitchOn} onValueChange={_updateInfos} color={theme.colors.primary}/>}/>
         </Card>
       </View>
     </BackgroundApp>

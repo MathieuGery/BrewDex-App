@@ -34,7 +34,7 @@ const Header = () => {
       </View>
       <View style={styles.description}>
         <Text style={{fontWeight: 'bold'}}>Description</Text>
-        <Text>Lorem ipsum afndnfnqsnjdkfnq sueesfn</Text>
+        <Text>{userInfos.description}</Text>
       </View>
     </Card>
     </Background>
