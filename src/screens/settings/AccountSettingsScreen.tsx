@@ -1,18 +1,15 @@
 import React, {memo, useEffect} from 'react';
 import {ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View} from "react-native";
-import {ActivityIndicator, Avatar, Button, Card, Headline, IconButton, Text} from "react-native-paper";
-import BackButton from "../../components/BackButton";
+import {ActivityIndicator, Avatar, Button, Card, IconButton, Text} from "react-native-paper";
 import {theme} from "../../core/theme";
-import BackgroundApp from "../../components/BackgroundApp";
 import SettingHeader from "../../components/settings/SettingHeader";
 import * as ImagePicker from 'expo-image-picker';
 import authServices from "../../services/Auth";
 import TextInput from "../../components/TextInput";
-import {emailValidator, passwordValidator} from "../../core/utils";
 import MySnackBar from "../../components/MySnackBar";
 
 
-const AccountSettingsScreen = ({ navigation }) => {
+const AccountSettingsScreen = ({navigation}) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [userInfos, setUserInfos] = React.useState({
@@ -40,13 +37,21 @@ const AccountSettingsScreen = ({ navigation }) => {
   };
 
   const _updateInfos = async () => {
-    await authServices.editUserInfos({'name': name, 'description': description, "location": location, "coutry": country}).then((resp) => {setIsVisible(true); setUserInfos(resp.user)});
+    await authServices.editUserInfos({
+      'name': name,
+      'description': description,
+      "location": location,
+      "coutry": country
+    }).then((resp) => {
+      setIsVisible(true);
+      setUserInfos(resp.user)
+    });
   };
 
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
           alert('Sorry, we need camera roll permissions to make this work!');
         }
@@ -56,7 +61,8 @@ const AccountSettingsScreen = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      await authServices.getConnectedUserInfos().then((resp) => {setUserInfos(resp.user)
+      await authServices.getConnectedUserInfos().then((resp) => {
+        setUserInfos(resp.user)
         setName(resp.user.name);
         setLocation(resp.user.location);
         setDescription(resp.user.description);
@@ -74,80 +80,91 @@ const AccountSettingsScreen = ({ navigation }) => {
     >
       <SettingHeader navigation={navigation} title={"Compte"} subtitle={"Modifer les paramètres de votre compte"}/>
       <MySnackBar message={"Informations mises à jour"} isVisible={isVisible} setIsVisible={setIsVisible}/>
-      {isLoading ?  <ActivityIndicator size={100} animating={true} color={theme.colors.primary} style={{margin: "20%"}}/> :
-      <KeyboardAvoidingView style={styles.cardContainer} behavior="height" keyboardVerticalOffset={200}>
-        <Card style={styles.card}>
-          <Card.Title title="Globale"/>
-          <Card.Content>
+      {isLoading ?
+        <ActivityIndicator size={100} animating={true} color={theme.colors.primary} style={{margin: "20%"}}/> :
+        <KeyboardAvoidingView style={styles.cardContainer} behavior="height" keyboardVerticalOffset={200}>
+          <Card style={styles.card}>
+            <Card.Title title="Globale"/>
+            <Card.Content>
 
-            <Card style={{ borderRadius: 12, elevation: 2}}>
-              <Card.Content style={{    flexDirection: "row",
-               }}>
-                <Avatar.Image size={80} source={{ uri: 'data:image/jpeg;base64,' + userInfos.image }}/>
-                <IconButton
-                  icon="pencil-outline"
-                  color={theme.colors.primary}
-                  size={20}
-                  onPress={pickImage}
-                  style={{position: "absolute", top: 5, left: 60, backgroundColor: "white", borderColor: theme.colors.grey, borderWidth: 2}}
-                />
-                <View style={{marginLeft: "5%"}}>
-                  <Text style={{  fontSize: 25,
-                    fontWeight: "bold", paddingTop: "5%"}}>{userInfos.name}</Text>
-                  <View style={{flexDirection: "row"}}>
-                    <Text style={{fontWeight: 'bold'}}>{userInfos.location}</Text>
-                    <Text>, {userInfos.country}</Text>
+              <Card style={{borderRadius: 12, elevation: 2}}>
+                <Card.Content style={{
+                  flexDirection: "row",
+                }}>
+                  <Avatar.Image size={80} source={{uri: 'data:image/jpeg;base64,' + userInfos.image}}/>
+                  <IconButton
+                    icon="pencil-outline"
+                    color={theme.colors.primary}
+                    size={20}
+                    onPress={pickImage}
+                    style={{
+                      position: "absolute",
+                      top: 5,
+                      left: 60,
+                      backgroundColor: "white",
+                      borderColor: theme.colors.grey,
+                      borderWidth: 2
+                    }}
+                  />
+                  <View style={{marginLeft: "5%"}}>
+                    <Text style={{
+                      fontSize: 25,
+                      fontWeight: "bold", paddingTop: "5%"
+                    }}>{userInfos.name}</Text>
+                    <View style={{flexDirection: "row"}}>
+                      <Text style={{fontWeight: 'bold'}}>{userInfos.location}</Text>
+                      <Text>, {userInfos.country}</Text>
+                    </View>
                   </View>
-                </View>
-              </Card.Content>
-            </Card>
+                </Card.Content>
+              </Card>
 
-            <Card style={{ borderRadius: 12, elevation: 2, marginTop: "5%"}}>
-              <Card.Content style={{flexDirection: "column"}}>
-                <TextInput
-                  label="Name"
-                  value={name}
-                  onChangeText={text => setName(text)}
-                  returnKeyType="next"
-                  autoCapitalize="words"
-                />
-                <TextInput
-                  label="Description"
-                  value={description}
-                  onChangeText={text => setDescription(text)}
-                  returnKeyType="next"
-                  autoCapitalize="sentences"
-                  multiline={true}
-                  numberOfLines={3}
-                />
-                <View style={{flex: 0, flexDirection: "row", alignItems: "flex-start"}}>
-                  <View style={{flex: 1, marginRight: "2%"}}>
-                    <TextInput
-                      label="Ville"
-                      value={location}
-                      onChangeText={text => setLocation(text)}
-                      returnKeyType="next"
-                      autoCapitalize="words"
-                    />
+              <Card style={{borderRadius: 12, elevation: 2, marginTop: "5%"}}>
+                <Card.Content style={{flexDirection: "column"}}>
+                  <TextInput
+                    label="Name"
+                    value={name}
+                    onChangeText={text => setName(text)}
+                    returnKeyType="next"
+                    autoCapitalize="words"
+                  />
+                  <TextInput
+                    label="Description"
+                    value={description}
+                    onChangeText={text => setDescription(text)}
+                    returnKeyType="next"
+                    autoCapitalize="sentences"
+                    multiline={true}
+                    numberOfLines={3}
+                  />
+                  <View style={{flex: 0, flexDirection: "row", alignItems: "flex-start"}}>
+                    <View style={{flex: 1, marginRight: "2%"}}>
+                      <TextInput
+                        label="Ville"
+                        value={location}
+                        onChangeText={text => setLocation(text)}
+                        returnKeyType="next"
+                        autoCapitalize="words"
+                      />
+                    </View>
+                    <View style={{flex: 1, marginLeft: "2%"}}>
+                      <TextInput
+                        label="Pays"
+                        value={country}
+                        onChangeText={text => setCountry(text)}
+                        returnKeyType="next"
+                        autoCapitalize="words"
+                      />
+                    </View>
                   </View>
-                  <View style={{flex: 1, marginLeft: "2%"}}>
-                    <TextInput
-                      label="Pays"
-                      value={country}
-                      onChangeText={text => setCountry(text)}
-                      returnKeyType="next"
-                      autoCapitalize="words"
-                    />
-                  </View>
-                </View>
-                <Button mode="contained" onPress={_updateInfos} style={{marginHorizontal: "15%"}}>
-                  Sauvegarder
-                </Button>
-              </Card.Content>
-            </Card>
-          </Card.Content>
-        </Card>
-      </KeyboardAvoidingView>}
+                  <Button mode="contained" onPress={_updateInfos} style={{marginHorizontal: "15%"}}>
+                    Sauvegarder
+                  </Button>
+                </Card.Content>
+              </Card>
+            </Card.Content>
+          </Card>
+        </KeyboardAvoidingView>}
     </ImageBackground>
   );
 };

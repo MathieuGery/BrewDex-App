@@ -1,28 +1,23 @@
-import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, {memo, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Background from '../components/BackgroundAuth';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
-import { theme } from '../core/theme';
-import { Navigation } from '../types';
-import {
-  emailValidator,
-  passwordValidator,
-  nameValidator,
-} from '../core/utils';
+import {theme} from '../core/theme';
+import {emailValidator, nameValidator, passwordValidator,} from '../core/utils';
 import MySnackBar from '../components/MySnackBar';
 
-const RegisterScreen = ({ navigation, AuthContext }) => {
-  const [name, setName] = useState({ value: '', error: '' });
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
+const RegisterScreen = ({navigation, AuthContext}) => {
+  const [name, setName] = useState({value: '', error: ''});
+  const [email, setEmail] = useState({value: '', error: ''});
+  const [password, setPassword] = useState({value: '', error: ''});
   const [ErrorMessage, setErrorMessage] = useState('');
   const [IsVisible, setIsVisible] = useState(false);
 
-  const { signUp } = React.useContext(AuthContext);
+  const {signUp} = React.useContext(AuthContext);
 
   const _onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
@@ -30,19 +25,19 @@ const RegisterScreen = ({ navigation, AuthContext }) => {
     const passwordError = passwordValidator(password.value);
 
     if (emailError || passwordError || nameError) {
-      setName({ ...name, error: nameError });
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
+      setName({...name, error: nameError});
+      setEmail({...email, error: emailError});
+      setPassword({...password, error: passwordError});
       return;
     }
-    signUp({ email, name, password }, setIsVisible, setErrorMessage, navigation)
+    signUp({email, name, password}, setIsVisible, setErrorMessage, navigation)
   };
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+      <BackButton goBack={() => navigation.navigate('HomeScreen')}/>
 
-      <Logo />
+      <Logo/>
 
       <Header>Create Account</Header>
 
@@ -50,7 +45,7 @@ const RegisterScreen = ({ navigation, AuthContext }) => {
         label="Nom"
         returnKeyType="next"
         value={name.value}
-        onChangeText={text => setName({ value: text, error: '' })}
+        onChangeText={text => setName({value: text, error: ''})}
         error={!!name.error}
         errorText={name.error}
       />
@@ -59,7 +54,7 @@ const RegisterScreen = ({ navigation, AuthContext }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
+        onChangeText={text => setEmail({value: text, error: ''})}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -72,7 +67,7 @@ const RegisterScreen = ({ navigation, AuthContext }) => {
         label="Mot de passe"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text, error: '' })}
+        onChangeText={text => setPassword({value: text, error: ''})}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry

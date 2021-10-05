@@ -3,7 +3,7 @@ import Background from "../components/BackgroundApp";
 import {StatusBar, StyleSheet, View} from "react-native";
 import {Searchbar} from "react-native-paper";
 
-const SearchScreen = ({ AuthContext }) => {
+const SearchScreen = ({AuthContext}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = query => setSearchQuery(query);

@@ -1,12 +1,12 @@
 import React, {memo} from "react";
-import { Card, Headline, Text } from "react-native-paper";
+import {Card, Headline, Text} from "react-native-paper";
 import Background from "../components/BackgroundApp";
-import { StyleSheet, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {theme} from "../core/theme";
 import ButtonCard from "../components/ButtonCard";
 import SettingSection from "../components/SettingSection";
 
-const SettingsScreen = ({ navigation, AuthContext }) => {
+const SettingsScreen = ({navigation, AuthContext}) => {
   return (
     <Background>
       <View style={styles.headerContainer}>
@@ -17,12 +17,17 @@ const SettingsScreen = ({ navigation, AuthContext }) => {
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Card.Title title="Globale"/>
-          <SettingSection icon={"account-circle-outline"} text={"Compte"} navigation={navigation} goto={"AccountSettingsScreen"}/>
-          <SettingSection icon={"bell-outline"} text={"Notifications"} navigation={navigation} goto={"NotificationsSettingsScreen"}/>
+          <SettingSection icon={"account-circle-outline"} text={"Compte"} navigation={navigation}
+                          goto={"AccountSettingsScreen"}/>
+          <SettingSection icon={"bell-outline"} text={"Notifications"} navigation={navigation}
+                          goto={"NotificationsSettingsScreen"}/>
           <Card.Title title="Aide/Contact"/>
-          <SettingSection icon={"email-outline"} text={"Contact"} navigation={navigation} goto={"AccountSettingsScreen"}/>
-          <SettingSection icon={"shield-check-outline"} text={"Condition Général"} navigation={navigation} goto={"AccountSettingsScreen"}/>
-          <SettingSection icon={"gift-outline"} text={"Soutenir l'application"} navigation={navigation} goto={"AccountSettingsScreen"}/>
+          <SettingSection icon={"email-outline"} text={"Contact"} navigation={navigation}
+                          goto={"AccountSettingsScreen"}/>
+          <SettingSection icon={"shield-check-outline"} text={"Condition Général"} navigation={navigation}
+                          goto={"AccountSettingsScreen"}/>
+          <SettingSection icon={"gift-outline"} text={"Soutenir l'application"} navigation={navigation}
+                          goto={"AccountSettingsScreen"}/>
         </Card>
         <ButtonCard icon={"power"} text={"Déconnexion"} AuthContext={AuthContext}/>
       </View>

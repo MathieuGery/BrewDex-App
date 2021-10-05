@@ -1,27 +1,27 @@
-import React, { memo, useState } from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { emailValidator } from '../core/utils';
+import React, {memo, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {emailValidator} from '../core/utils';
 import Background from '../components/BackgroundAuth';
 import BackButton from '../components/BackButton';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import TextInput from '../components/TextInput';
-import { theme } from '../core/theme';
+import {theme} from '../core/theme';
 import Button from '../components/Button';
-import { Navigation } from '../types';
+import {Navigation} from '../types';
 
 type Props = {
   navigation: Navigation;
 };
 
-const ForgotPasswordScreen = ({ navigation }: Props) => {
-  const [email, setEmail] = useState({ value: '', error: '' });
+const ForgotPasswordScreen = ({navigation}: Props) => {
+  const [email, setEmail] = useState({value: '', error: ''});
 
   const _onSendPressed = () => {
     const emailError = emailValidator(email.value);
 
     if (emailError) {
-      setEmail({ ...email, error: emailError });
+      setEmail({...email, error: emailError});
       return;
     }
 
@@ -30,9 +30,9 @@ const ForgotPasswordScreen = ({ navigation }: Props) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('LoginScreen')} />
+      <BackButton goBack={() => navigation.navigate('LoginScreen')}/>
 
-      <Logo />
+      <Logo/>
 
       <Header>Mot de passe oublié</Header>
 
@@ -40,7 +40,7 @@ const ForgotPasswordScreen = ({ navigation }: Props) => {
         label="Email"
         returnKeyType="done"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
+        onChangeText={text => setEmail({value: text, error: ''})}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"

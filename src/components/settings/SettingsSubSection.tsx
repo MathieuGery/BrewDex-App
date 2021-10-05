@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     width: "200%",
-    transform: [{ scaleX: 1 }, { scaleY: 1 }]
+    transform: [{scaleX: 1}, {scaleY: 1}]
   },
   card: {
     marginHorizontal: '3%',

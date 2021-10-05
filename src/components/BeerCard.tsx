@@ -1,15 +1,16 @@
-import {Avatar, Button, Card, Paragraph, Text, Title} from "react-native-paper";
-import React, {memo} from "react";
+import {Avatar, Button, Card, Paragraph, Title} from "react-native-paper";
+import React from "react";
 import {Image, StyleSheet} from "react-native";
 
-const LeftContent = props => <Avatar.Image {...props} source={{ uri: 'https://picsum.photos/700' }} />
+const LeftContent = props => <Avatar.Image {...props} source={{uri: 'https://picsum.photos/700'}}/>
 const RightContent = props => <Image {...props} style={styles.tinyLogo} source={{uri: 'https://picsum.photos/700'}}/>
 
 export default function BeerCard() {
 
   return (
     <Card style={styles.card}>
-      <Card.Title title="This is a good user" subtitle="Embassador" left={LeftContent} right={RightContent} rightStyle={styles.rightContent}/>
+      <Card.Title title="This is a good user" subtitle="Embassador" left={LeftContent} right={RightContent}
+                  rightStyle={styles.rightContent}/>
       <Card.Content>
         <Title>Card title</Title>
         <Paragraph>Card content</Paragraph>

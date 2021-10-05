@@ -1,43 +1,43 @@
-import React, { memo, useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import React, {memo, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Background from '../components/BackgroundAuth';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
-import { theme } from '../core/theme';
-import { emailValidator, passwordValidator } from '../core/utils';
+import {theme} from '../core/theme';
+import {emailValidator, passwordValidator} from '../core/utils';
 import MySnackBar from "../components/MySnackBar";
 import {ActivityIndicator} from "react-native-paper";
 
-const LoginScreen = ({ navigation, AuthContext }) => {
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
+const LoginScreen = ({navigation, AuthContext}) => {
+  const [email, setEmail] = useState({value: '', error: ''});
+  const [password, setPassword] = useState({value: '', error: ''});
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState('');
 
-  const { signIn } = React.useContext(AuthContext);
+  const {signIn} = React.useContext(AuthContext);
 
   const _onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
     if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
+      setEmail({...email, error: emailError});
+      setPassword({...password, error: passwordError});
       return;
     }
     setIsLoading(true)
-    signIn({ email, password }, setIsVisible, setIsLoading, setErrorMessage)
+    signIn({email, password}, setIsVisible, setIsLoading, setErrorMessage)
   };
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+      <BackButton goBack={() => navigation.navigate('HomeScreen')}/>
 
-      <Logo />
+      <Logo/>
 
       <Header>De retour</Header>
 
@@ -45,7 +45,7 @@ const LoginScreen = ({ navigation, AuthContext }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
+        onChangeText={text => setEmail({value: text, error: ''})}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -58,7 +58,7 @@ const LoginScreen = ({ navigation, AuthContext }) => {
         label="Mot de passe"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text, error: '' })}
+        onChangeText={text => setPassword({value: text, error: ''})}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -84,7 +84,7 @@ const LoginScreen = ({ navigation, AuthContext }) => {
       </View>
       <MySnackBar message={ErrorMessage} isVisible={isVisible} setIsVisible={setIsVisible}/>
       {isLoading &&
-        <ActivityIndicator size={100} animating={true} color={theme.colors.primary}/>
+      <ActivityIndicator size={100} animating={true} color={theme.colors.primary}/>
       }
     </Background>
   );

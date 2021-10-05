@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import Background from "./BackgroundAuth";
+import React, {useEffect, useState} from 'react';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {BarCodeScanner} from 'expo-barcode-scanner';
 import authServices from "../services/Auth";
-import { theme } from '../core/theme';
-import { ActivityIndicator } from "react-native-paper";
-import BeerCard from "./BeerCard";
+import {theme} from '../core/theme';
+import {ActivityIndicator} from "react-native-paper";
 
-export default function MyBarCodeScanner () {
+export default function MyBarCodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [beerInfos, setBeerInfos] = useState('');
@@ -15,7 +13,7 @@ export default function MyBarCodeScanner () {
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      const {status} = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
@@ -25,15 +23,17 @@ export default function MyBarCodeScanner () {
     alert(`Bar code with type and data ${data.infos.product.product_name} has been scanned!`);
   };
 
-  const handleBarCodeScanned = async ({ type, data }) => {
+  const handleBarCodeScanned = async ({type, data}) => {
     setScanned(true);
     setIsLoading(true);
     await authServices.getBeerInfos(
-      { product_id: data},
+      {product_id: data},
     )
       .then((data) => handleBeeInfos(data))
-      .catch((error) => {    setIsLoading(false);
-        alert(`Bar code with type and data ${error.data} has been scanned!`)});
+      .catch((error) => {
+        setIsLoading(false);
+        alert(`Bar code with type and data ${error.data} has been scanned!`)
+      });
   };
 
   if (hasPermission === null) {
@@ -45,12 +45,12 @@ export default function MyBarCodeScanner () {
 
   return (
     <View style={styles.container}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        <ActivityIndicator animating={isLoading} color={theme.colors.primary} size={'large'}/>
-        {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
+      <ActivityIndicator animating={isLoading} color={theme.colors.primary} size={'large'}/>
+      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>}
     </View>
   );
 }
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
     top: 0,
   },
   button: {
-    flex:1
+    flex: 1
   }
 });

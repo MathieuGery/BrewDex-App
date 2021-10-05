@@ -1,15 +1,11 @@
-import React, { memo } from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  KeyboardAvoidingView,
-} from 'react-native';
+import React, {memo} from 'react';
+import {ImageBackground, KeyboardAvoidingView, StyleSheet,} from 'react-native';
 
 type Props = {
   children: React.ReactNode;
 };
 
-const BackgroundAuth = ({ children }: Props) => (
+const BackgroundAuth = ({children}: Props) => (
   <ImageBackground
     source={require('../assets/background_dot.png')}
     resizeMode="repeat"

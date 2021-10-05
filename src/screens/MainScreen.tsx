@@ -1,8 +1,7 @@
 import React, {memo} from "react";
 import BackgroundApp from "../components/BackgroundApp";
 import BeerCard from "../components/BeerCard";
-import {FlatList, RefreshControl, SafeAreaView, StatusBar} from "react-native";
-import {StyleSheet} from "react-native";
+import {FlatList, RefreshControl, SafeAreaView, StatusBar, StyleSheet} from "react-native";
 
 
 const wait = (timeout) => {
@@ -38,12 +37,13 @@ const MainScreen = () => {
 
   return (
     <BackgroundApp>
-    <SafeAreaView style={styles.container}>
-      <FlatList data={DATA} renderItem={BeerCard} keyExtractor={item => item.id} bounces={true} alwaysBounceVertical={true} horizontal={false} refreshControl={<RefreshControl
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-      />}/>
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <FlatList data={DATA} renderItem={BeerCard} keyExtractor={item => item.id} bounces={true}
+                  alwaysBounceVertical={true} horizontal={false} refreshControl={<RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />}/>
+      </SafeAreaView>
     </BackgroundApp>
 
   )

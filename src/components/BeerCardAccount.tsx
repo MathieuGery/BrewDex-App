@@ -1,5 +1,5 @@
-import {Avatar, Badge, Button, Card, Paragraph, Text, Title} from "react-native-paper";
-import React, {memo} from "react";
+import {Card, Paragraph, Title} from "react-native-paper";
+import React from "react";
 import {Image, StyleSheet} from "react-native";
 
 export default function BeerCardAccount({comment}) {
@@ -10,7 +10,7 @@ export default function BeerCardAccount({comment}) {
         <Title>toto</Title>
         <Paragraph numberOfLines={3} style={{marginBottom: "20%"}}>{comment}</Paragraph>
       </Card.Content>
-        <Paragraph style={styles.date}>10/20/2021</Paragraph>
+      <Paragraph style={styles.date}>10/20/2021</Paragraph>
     </Card>
   )
 }

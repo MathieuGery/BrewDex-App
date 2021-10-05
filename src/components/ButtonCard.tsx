@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import React, {memo} from 'react';
+import {StyleSheet} from 'react-native';
 import {Card, IconButton, Paragraph} from "react-native-paper";
 import {theme} from "../core/theme";
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   paragraph: {
-   marginLeft: "1%",
+    marginLeft: "1%",
     color: theme.colors.error
   }
 })

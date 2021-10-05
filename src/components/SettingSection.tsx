@@ -1,22 +1,22 @@
-import React, { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
-import {Button, Card, IconButton, Paragraph, TouchableRipple} from "react-native-paper";
+import React, {memo} from 'react';
+import {StyleSheet} from 'react-native';
+import {Button, Card, IconButton, Paragraph} from "react-native-paper";
 import {theme} from "../core/theme";
 
 
 const SettingSection = ({...props}) => {
   return (
     <Card onPress={() => props.navigation.navigate(props.goto)} style={styles.touchableRipple}>
-    <Card.Content style={styles.row}>
-      <IconButton
-        icon={props.icon}
-        color={theme.colors.grey}
-        size={20}
-        style={styles.icon}
-      />
-      <Paragraph style={styles.paragraph}>{props.text}</Paragraph>
-      <Button style={styles.arrow} icon="chevron-right" mode="text"> </Button>
-    </Card.Content>
+      <Card.Content style={styles.row}>
+        <IconButton
+          icon={props.icon}
+          color={theme.colors.grey}
+          size={20}
+          style={styles.icon}
+        />
+        <Paragraph style={styles.paragraph}>{props.text}</Paragraph>
+        <Button style={styles.arrow} icon="chevron-right" mode="text"> </Button>
+      </Card.Content>
     </Card>
   )
 };

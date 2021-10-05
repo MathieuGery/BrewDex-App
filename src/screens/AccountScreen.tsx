@@ -1,9 +1,9 @@
 import React, {memo, useEffect} from "react";
 import Background from "../components/BackgroundApp";
-import {ListRenderItem, StatusBar, StyleSheet, View} from "react-native";
+import {ListRenderItem, StyleSheet, View} from "react-native";
 import {Avatar, Card, Text} from "react-native-paper";
 import ProfileStats from "../components/ProfileStats";
-import { Tabs } from 'react-native-collapsible-tab-view'
+import {Tabs} from 'react-native-collapsible-tab-view'
 import BeerCardAccount from "../components/BeerCardAccount";
 import authServices from "../services/Auth";
 
@@ -22,21 +22,21 @@ const Header = () => {
 
   return (
     <Background>
-    <Card style={styles.container} pointerEvents={'box-none'}>
-      <View style={styles.container1}>
-        <Avatar.Image size={100} source={{ uri: 'data:image/jpeg;base64,' + userInfos.image }} style={styles.avatar}/>
-        <Text style={styles.userName}>{userInfos.name}</Text>
-        <View style={{flexDirection: "row"}}>
-          <Text style={{fontWeight: 'bold'}}>Lille</Text>
-          <Text>, France</Text>
+      <Card style={styles.container} pointerEvents={'box-none'}>
+        <View style={styles.container1}>
+          <Avatar.Image size={100} source={{uri: 'data:image/jpeg;base64,' + userInfos.image}} style={styles.avatar}/>
+          <Text style={styles.userName}>{userInfos.name}</Text>
+          <View style={{flexDirection: "row"}}>
+            <Text style={{fontWeight: 'bold'}}>Lille</Text>
+            <Text>, France</Text>
+          </View>
+          <ProfileStats stats={userInfos}/>
         </View>
-        <ProfileStats stats={userInfos}/>
-      </View>
-      <View style={styles.description}>
-        <Text style={{fontWeight: 'bold'}}>Description</Text>
-        <Text>{userInfos.description}</Text>
-      </View>
-    </Card>
+        <View style={styles.description}>
+          <Text style={{fontWeight: 'bold'}}>Description</Text>
+          <Text>{userInfos.description}</Text>
+        </View>
+      </Card>
     </Background>
 
   )
@@ -47,13 +47,16 @@ const AccountScreen: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      await authServices.getConnectedUserInfos().then((resp) => {setUserInfos(resp.user);  console.log(userInfos.beers)});
+      await authServices.getConnectedUserInfos().then((resp) => {
+        setUserInfos(resp.user);
+        console.log(userInfos.beers)
+      });
     })();
   }, []);
 
-  const renderItem: ListRenderItem<number> = React.useCallback(({ index }) => {
+  const renderItem: ListRenderItem<number> = React.useCallback(({index}) => {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+      <View style={{flex: 1, flexDirection: 'column', margin: 1}}>
         <BeerCardAccount comment={index}/>
       </View>
     )
@@ -70,8 +73,8 @@ const AccountScreen: React.FC = () => {
         <Tabs.Tab name="Favorites">
           <Tabs.FlatList
             data={userInfos.beers}
-            renderItem={({ item }) => (
-              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+            renderItem={({item}) => (
+              <View style={{flex: 1, flexDirection: 'column', margin: 1}}>
                 <BeerCardAccount comment={item.comment}/>
               </View>
             )}

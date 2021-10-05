@@ -3,13 +3,12 @@ import {StyleSheet, View} from "react-native";
 import {Headline, Text} from "react-native-paper";
 import BackButton from "../../components/BackButton";
 import {theme} from "../../core/theme";
-import BackgroundApp from "../../components/BackgroundApp";
 
 
-const SettingHeader = ({ navigation, title, subtitle }) => {
+const SettingHeader = ({navigation, title, subtitle}) => {
   return (
     <View style={styles.headerContainer}>
-      <BackButton goBack={() => navigation.goBack()} />
+      <BackButton goBack={() => navigation.goBack()}/>
       <Headline style={{marginTop: "5%"}}>{title}</Headline>
       <Text>{subtitle}</Text>
     </View>

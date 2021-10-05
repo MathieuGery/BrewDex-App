@@ -2,23 +2,22 @@ import React, {memo, useEffect} from 'react';
 import {StyleSheet, View} from "react-native";
 import BackgroundApp from "../../components/BackgroundApp";
 import SettingHeader from "../../components/settings/SettingHeader";
-import {Button, Card, IconButton, Paragraph, Switch} from "react-native-paper";
-import SettingSection from "../../components/SettingSection";
+import {Card, Switch} from "react-native-paper";
 import SettingsSubSection from "../../components/settings/SettingsSubSection";
 import {theme} from "../../core/theme";
 import authServices from "../../services/Auth";
 
 
-
-
-const NotificationsSettingsScreen = ({ navigation }) => {
+const NotificationsSettingsScreen = ({navigation}) => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(Boolean);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
   const _updateInfos = async () => {
     setIsSwitchOn(!isSwitchOn);
     console.log(!isSwitchOn)
-    await authServices.editUserInfos({'notifications': !isSwitchOn}).then((resp) => {console.log(resp.user.notifications)});
+    await authServices.editUserInfos({'notifications': !isSwitchOn}).then((resp) => {
+      console.log(resp.user.notifications)
+    });
   };
 
   useEffect(() => {
@@ -29,7 +28,8 @@ const NotificationsSettingsScreen = ({ navigation }) => {
 
   return (
     <BackgroundApp>
-      <SettingHeader navigation={navigation} title={"Notifications"} subtitle={"Modifer les paramètres de notifications"}/>
+      <SettingHeader navigation={navigation} title={"Notifications"}
+                     subtitle={"Modifer les paramètres de notifications"}/>
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Card.Title title="Notifications"/>

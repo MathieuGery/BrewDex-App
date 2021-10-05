@@ -1,6 +1,6 @@
 import React, {memo} from "react";
-import { StyleSheet, View} from "react-native";
-import {Card, Paragraph, Text, Title} from "react-native-paper";
+import {StyleSheet, View} from "react-native";
+import {Card, Paragraph, Title} from "react-native-paper";
 import {theme} from "../core/theme";
 
 const ProfileStats = ({stats}) => {
@@ -32,8 +32,7 @@ const ProfileStats = ({stats}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   cards: {
     marginHorizontal: "4%",
     marginBottom: "5%",

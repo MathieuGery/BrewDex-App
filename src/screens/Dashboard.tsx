@@ -1,11 +1,10 @@
-import React, {memo, useState} from 'react';
-import { Navigation } from '../types';
+import React, {memo} from 'react';
 import NavBar from "../components/NavBar";
 import {StyleSheet} from "react-native";
 import {theme} from "../core/theme";
 
-const Dashboard = ({ navigation, AuthContext }) => {
-    return (
+const Dashboard = ({navigation, AuthContext}) => {
+  return (
     <NavBar navigation={navigation} AuthContext={AuthContext}/>
   );
 };
