@@ -82,7 +82,7 @@ const AccountSettingsScreen = ({navigation}) => {
       <MySnackBar message={"Informations mises à jour"} isVisible={isVisible} setIsVisible={setIsVisible}/>
       {isLoading ?
         <ActivityIndicator size={100} animating={true} color={theme.colors.primary} style={{margin: "20%"}}/> :
-        <KeyboardAvoidingView style={styles.cardContainer} behavior="height" keyboardVerticalOffset={200}>
+        <KeyboardAvoidingView style={styles.cardContainer} behavior="position" keyboardVerticalOffset={0}>
           <Card style={styles.card}>
             <Card.Title title="Globale"/>
             <Card.Content>
@@ -152,7 +152,7 @@ const AccountSettingsScreen = ({navigation}) => {
                         label="Pays"
                         value={country}
                         onChangeText={text => setCountry(text)}
-                        returnKeyType="next"
+                        returnKeyType="done"
                         autoCapitalize="words"
                       />
                     </View>
