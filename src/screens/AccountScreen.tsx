@@ -5,13 +5,14 @@ import {Avatar, Card, Text} from "react-native-paper";
 import ProfileStats from "../components/ProfileStats";
 import { Tabs } from 'react-native-collapsible-tab-view'
 import BeerCardAccount from "../components/BeerCardAccount";
-import {BarCodeScanner} from "expo-barcode-scanner";
 import authServices from "../services/Auth";
 
 const HEADER_HEIGHT = 400
 
 const Header = () => {
-  const [userInfos, setUserInfos] = React.useState({});
+  const [userInfos, setUserInfos] = React.useState({
+    name: undefined
+  });
 
   useEffect(() => {
     (async () => {
@@ -23,7 +24,7 @@ const Header = () => {
     <Background>
     <Card style={styles.container} pointerEvents={'box-none'}>
       <View style={styles.container1}>
-        <Avatar.Image size={100} source={{ uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y' }} style={styles.avatar}/>
+        <Avatar.Image size={100} source={{ uri: 'data:image/jpeg;base64,' + userInfos.image }} style={styles.avatar}/>
         <Text style={styles.userName}>{userInfos.name}</Text>
         <View style={{flexDirection: "row"}}>
           <Text style={{fontWeight: 'bold'}}>Lille</Text>

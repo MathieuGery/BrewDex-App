@@ -46,12 +46,23 @@ async function getConnectedUserInfos() {
   });
 }
 
+async function editUserInfos(data) {
+  const headers = await setHeader();
+
+  return request({
+    url: '/auth/edit_infos',
+    method: 'POST',
+    data,
+    headers,
+  });
+}
 
 const authServices = {
   register,
   login,
   getBeerInfos,
-  getConnectedUserInfos
+  getConnectedUserInfos,
+  editUserInfos
 };
 
 export default authServices;
