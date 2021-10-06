@@ -1,5 +1,5 @@
 import React, {memo, useEffect} from 'react';
-import {ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View} from "react-native";
+import {ImageBackground, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View} from "react-native";
 import {ActivityIndicator, Avatar, Button, Card, IconButton, Text} from "react-native-paper";
 import {theme} from "../../core/theme";
 import SettingHeader from "../../components/settings/SettingHeader";
@@ -73,16 +73,12 @@ const AccountSettingsScreen = ({navigation}) => {
   }, []);
 
   return (
-    <ImageBackground
-      source={require('../../assets/background_dot.png')}
-      resizeMode="repeat"
-      style={{width: "100%"}}
-    >
+    <View style={{flex: 1}}>
+      <ScrollView>
       <SettingHeader navigation={navigation} title={"Compte"} subtitle={"Modifer les paramètres de votre compte"}/>
-      <MySnackBar message={"Informations mises à jour"} isVisible={isVisible} setIsVisible={setIsVisible}/>
       {isLoading ?
         <ActivityIndicator size={100} animating={true} color={theme.colors.primary} style={{margin: "20%"}}/> :
-        <KeyboardAvoidingView style={styles.cardContainer} behavior="position" keyboardVerticalOffset={0}>
+        <KeyboardAvoidingView style={styles.cardContainer} behavior="height" keyboardVerticalOffset={-100}>
           <Card style={styles.card}>
             <Card.Title title="Globale"/>
             <Card.Content>
@@ -165,13 +161,15 @@ const AccountSettingsScreen = ({navigation}) => {
             </Card.Content>
           </Card>
         </KeyboardAvoidingView>}
-    </ImageBackground>
+      </ScrollView>
+        <MySnackBar message={"Informations mises à jour"} isVisible={isVisible} setIsVisible={setIsVisible}/>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
-    marginTop: "-20%",
+    marginTop: "-12%",
     marginBottom: "20%",
     marginHorizontal: "5%"
   },

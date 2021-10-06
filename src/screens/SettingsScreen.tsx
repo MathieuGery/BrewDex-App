@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import {Card, Headline, Text} from "react-native-paper";
 import Background from "../components/BackgroundApp";
-import {StyleSheet, View} from "react-native";
+import {ScrollView, StyleSheet, View} from "react-native";
 import {theme} from "../core/theme";
 import ButtonCard from "../components/ButtonCard";
 import SettingSection from "../components/SettingSection";
@@ -9,6 +9,7 @@ import SettingSection from "../components/SettingSection";
 const SettingsScreen = ({navigation, AuthContext}) => {
   return (
     <Background>
+      <ScrollView style={{marginBottom: "0%"}} showsVerticalScrollIndicator={false}>
       <View style={styles.headerContainer}>
         <Headline>Paramètres</Headline>
         <Text>Vous pouvez modifier les paramètres ici</Text>
@@ -30,7 +31,11 @@ const SettingsScreen = ({navigation, AuthContext}) => {
                           goto={"AccountSettingsScreen"}/>
         </Card>
         <ButtonCard icon={"power"} text={"Déconnexion"} AuthContext={AuthContext}/>
+        <View style={{height: 100}}>
+
+        </View>
       </View>
+      </ScrollView>
     </Background>
   )
 };

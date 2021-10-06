@@ -32,7 +32,9 @@ const ProfileStats = ({stats}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingHorizontal: "20%"
+  },
   cards: {
     marginHorizontal: "4%",
     marginBottom: "5%",

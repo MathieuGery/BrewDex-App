@@ -27,8 +27,8 @@ const Header = () => {
           <Avatar.Image size={100} source={{uri: 'data:image/jpeg;base64,' + userInfos.image}} style={styles.avatar}/>
           <Text style={styles.userName}>{userInfos.name}</Text>
           <View style={{flexDirection: "row"}}>
-            <Text style={{fontWeight: 'bold'}}>Lille</Text>
-            <Text>, France</Text>
+            <Text style={{fontWeight: 'bold'}}>{userInfos.location}</Text>
+            <Text>, {userInfos.country}</Text>
           </View>
           <ProfileStats stats={userInfos}/>
         </View>
